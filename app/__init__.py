@@ -1,5 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+from flask_moment import Moment
+
 db = SQLAlchemy()
+loginManager = LoginManager()
+loginManager.session_protection = 'strong'
+loginManager.login_view = 'auth.login'
+moment = Moment()
 
 from .admin import admin
 from .main import main
@@ -14,6 +21,8 @@ def create_app():
     app.config.from_object(Config)
     db.init_app(app)
     db.app = app
+    loginManager.init_app(app)
+    moment.init_app(app)
     app.register_blueprint(main)
     app.register_blueprint(admin, url_prefix='/admin')
     app.register_blueprint(auth, url_prefix='/auth')

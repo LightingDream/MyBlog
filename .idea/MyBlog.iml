@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="PYTHON_MODULE" version="4">
+<<<<<<< HEAD
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="Python 3.5.2 (/usr/bin/python3.5) (1)" jdkType="Python SDK" />
+=======
+  <component name="Flask">
+    <option name="enabled" value="true" />
+  </component>
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/app/static" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.7 (MyBlog)" jdkType="Python SDK" />
+>>>>>>> cbb760158edbfb816bbc2edbd790e456de93a85b
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
@@ -10,6 +22,10 @@
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/app/templates" />
+<<<<<<< HEAD
+=======
+        <option value="$MODULE_DIR$/app/static" />
+>>>>>>> cbb760158edbfb816bbc2edbd790e456de93a85b
       </list>
     </option>
   </component>

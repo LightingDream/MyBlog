@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.5.2 (/usr/bin/python3.5) (1)" project-jdk-type="Python SDK" />
+=======
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.7 (MyBlog)" project-jdk-type="Python SDK" />
+>>>>>>> cbb760158edbfb816bbc2edbd790e456de93a85b
 </project>
