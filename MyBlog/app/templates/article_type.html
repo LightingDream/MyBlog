@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+    Closer'Blog - {{ article_type.name }}
+{% endblock %}
+{% block content %}
+{% for artilce in article_type.articles %}
+    {% if artilce %}
+        {{ artilce.title }}
+    {% endif %}
+    <div class="label-info">
+{#        {{ article.summary }}#}
+    </div>
+{% endfor %}
+{% endblock %}

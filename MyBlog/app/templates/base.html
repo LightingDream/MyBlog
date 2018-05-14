@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        Closer's Blog
+        {% endblock %}
+    </title>
+    {% block stylesheet %}
+        <link href="{{ url_for('static', filename='editor.md-master/css/editormd.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+<header>
+    <div class='header-top'>
+        <div class="container">
+            <h2  class="blog-title"><a href="{{ url_for('main.index') }}">Closer's Space</a></h2>
+            <p class="lead signature">
+                梦河之上, 一叶扁舟
+            </p>
+        </div>
+    </div>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class=""><a href="/"><span class="glyphicon glyphicon-home"> 首页</span></a></li>
+                     {% for menu in Menu.query.all() %}
+                         {% if menu.types.count() %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ menu.name }} <b
+                                        class="caret"></b></a>
+                                 <ul class="dropdown-menu">
+                                    {% for article_type in menu.types.all() %}
+                                        <li>
+                                            <a href="{{ url_for('main.article_types',id=article_type.id) }}">
+                                                {{ article_type.name }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                         {% endif %}s
+                    {% endfor %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                      {% if current_user.is_authenticated %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+{#                                <img src="{{ current_user.gravatar(size=18) }}">#}
+                                {{ current_user.username }} <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url_for('admin.write_articles') }}">写新文章</a></li>
+                                <li><a href="#">管理博客</a></li>
+                                <li><a href="#">Logout</a></li>
+                            </ul>
+                        </li>
+                      {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+{% block Content %}
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 article">
+                  {% for style, message in get_flashed_messages(with_categories=true) %}
+                        <div class="alert alert-{{ style }} alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ message }}
+                        </div>
+                  {% endfor %}
+                  {% block content %}
+                  {% endblock %}
+                </div>
+            <div class="col-md-3 entry-box" style="background-color: ">
+                    <ul class="nav nav-list">
+				<li class="nav-header">Summary</li>
+				<li><a href="#">关于博主</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+<div class="footer">
+    <p class="footer-content">
+        @CopyRight
+        <a href="#">ADRUI</a>
+        -个人博客系统
+        {% if not current_user.is_authenticated %}
+            -<a href="{{ url_for('auth.login') }}">
+            <span class="glyphicon glyphicon-wrench">后台管理</span>
+        </a>
+        {% endif %}
+        <br>
+        友情链接:<a href="#">OhYee</a>
+        -<a href="http://blog.csdn.net/adjky">Adjky</a>
+    </p>
+</div>
+<div class="btn-group-vertical floatButton">
+    <button id="goTop" class="btn btn-default" title="去顶部" type="button">
+        <span class="glyphicon glyphicon-arrow-up"></span>
+    </button>
+    <button id="refresh" class="btn btn-default" title="刷新" type="button">
+        <span class="glyphicon glyphicon-refresh"></span>
+    </button>
+    <button id="goBottom" class="btn btn-default" title="去底部" type="button">
+        <span class="glyphicon glyphicon-arrow-down"></span>
+    </button>
+</div>
+{% block script %}
+    <script src="{{ url_for('static', filename='editor.md-master/editormd.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-2.2.1.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+{% endblock %}
+</body>
+</html>
